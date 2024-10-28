@@ -20,6 +20,12 @@ class Todo(db.Model):
 
 @app.route("/", methods=['GET','POST'])
 def hello_world():
+    # Log the headers
+    print('Headers:', request.headers)
+
+    # Log the original client's IP
+    client_ip = request.headers.get('X-Real-IP') or request.headers.get('X-Forwarded-For') or request.remote_addr
+    print('Client IP:', client_ip)
     if request.method == 'POST':
         title = request.form['title']
         desc = request.form['desc']
